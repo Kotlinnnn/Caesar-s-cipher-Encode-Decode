@@ -20,6 +20,21 @@ function outputResult(result){
 function encode(){
     createCipher();
     
+    let text = cipherEncodeText.value;
+    let result = '';
+    for (let i = 0; i < text.length; i++){
+        if (text.charAt(i) == ' '){
+            result += ' ';
+        }
+        else if(cipher[alphabet.indexOf(text.toUpperCase().charAt(i))] == undefined){
+            result += '�';
+            // result += String.fromCharCode(UxFFFD);
+        }
+        else{
+            result += cipher[alphabet.indexOf(text.toUpperCase().charAt(i))];
+        }
+    }
+    outputResult(result);
 }
 
 btnEncode.addEventListener("click", encode);
