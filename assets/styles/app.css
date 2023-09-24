@@ -1,0 +1,13 @@
+body, html{
+    margin: 0;
+}
+main{
+    width: 80vw;
+    margin: 0 auto;
+    display: table;
+}
+.container{
+    width: fit-content;
+    text-align: center;
+    display: table-row;
+}

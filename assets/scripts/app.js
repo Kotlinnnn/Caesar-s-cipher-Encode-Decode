@@ -5,36 +5,55 @@ function createCipher(){
     const key = getUsrCipherKey();
     cipher = []; //clear the old one 
     
-    for (let i = key; i <= 25; i++){
+    for (let i = key; i <= alphabet.length - 1; i++){
         cipher.push(alphabet[i]);
     }
     for (let i = 0; i < key; i++){
         cipher.push(alphabet[i]);
     }
-    console.log(alphabet);
-    console.log(cipher)
 }
 function outputResult(result){
-    alert(result);
+    resultOutput.innerHTML = result;
 }
+
 function encode(){
     createCipher();
     
-    let text = cipherEncodeText.value;
+    let text = cipherEncodeText.value.toUpperCase();
     let result = '';
+
     for (let i = 0; i < text.length; i++){
         if (text.charAt(i) == ' '){
             result += ' ';
         }
-        else if(cipher[alphabet.indexOf(text.toUpperCase().charAt(i))] == undefined){
+        else if (cipher[alphabet.indexOf(text.charAt(i))] == undefined){
             result += '�';
-            // result += String.fromCharCode(UxFFFD);
         }
         else{
-            result += cipher[alphabet.indexOf(text.toUpperCase().charAt(i))];
+            result += cipher[alphabet.indexOf(text.charAt(i))];
+        }
+    }
+    outputResult(result);
+}
+function decode(){
+    createCipher();
+
+    let text = cipherDecodeText.value.toUpperCase();
+    let result = '';
+
+    for (let i = 0; i < text.length; i++){
+        if (text.charAt(i) == ' '){
+            result += ' ';
+        }
+        else if (alphabet.indexOf(text.charAt(i)) == undefined){
+            result += '�';
+        }
+        else{
+            result += alphabet[cipher.indexOf(text.charAt(i))];
         }
     }
     outputResult(result);
 }
 
 btnEncode.addEventListener("click", encode);
+btnDecode.addEventListener("click", decode);
