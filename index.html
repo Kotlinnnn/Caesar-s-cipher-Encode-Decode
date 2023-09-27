@@ -15,7 +15,8 @@
         <button type="button" id="btnDecode">Decode</button>
         </div>
         <div class="container">
-            <select name="shift" id="key">
+            <label for="shiftValue">Shift Value:</label>
+            <select name="shiftValue" id="shiftValue">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -43,6 +44,18 @@
                 <option value="24">24</option>
                 <option value="25">25</option>
                 <option value="26">26</option>
+            </select>
+            <br>
+            <label for="shiftDirection">Shift Direction:</label>
+            <select name="shiftDirection" id="shiftDirection">
+                <option value="0" selected>Left</option>
+                <option value="1">Right</option>
+            </select>
+            <br>
+            <label for="selectAlphabet">Select Alphabet:</label>
+            <select name="selectAlphabet" id="selectedAlphabet">
+                <option value="LatinAlphabet" selected>Latin</option>
+                <option value="PolishAlphabet">Polish</option>
             </select>
         </div>
         <div class="container">
