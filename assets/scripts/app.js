@@ -1,4 +1,5 @@
-function rewriteSelectShift(){
+// Updating "Shift Value" element
+function SelectShiftUpdate(){
     const alphabet = selectAlphabet(selectedAlphabet.value);
     shiftValue.innerHTML = '';
 
@@ -6,25 +7,45 @@ function rewriteSelectShift(){
         let option = document.createElement('option');
         option.innerText = i;
         option.value = i;
+        if (i == 3){
+            option.defaultSelected = true;
+        }
         shiftValue.appendChild(option);
     }
 }
-function selectAlphabet(e){
-    switch(e){
+
+// Checking which alphabet the user wants to use
+function selectAlphabet(selectedAlphabet){
+    switch(selectedAlphabet){
         case "LatinAlphabet":
             return LatinAlphabet;
         case "PolishAlphabet":
             return PolishAlphabet;
+        case "CzechAlphabet":
+            return CzechAlphabet;
     }
 }
-function outputResult(result){
-    resultOutput.innerHTML = result;
+
+function outputResult(plaintext, ciphertext){
+    plaintextResult.innerHTML = plaintext;
+    ciphertextResult.innerHTML = ciphertext;
+}
+
+function writeToLog(operation, plaintext, ciphertext){ /* do smth with that later */
+    const IOLog = {
+        operation: operation,
+        plaintext: plaintext,
+        ciphertext: ciphertext
+    };
+    outputResult(plaintext, ciphertext)
+    userIOLog.push(IOLog);
+    console.log(userIOLog);
 }
 
 function createCipher(){
     const key = shiftValue.value;
     const direction = parseInt(shiftDirection.value); // 0 == left, 1 == right
-    const alphabet = selectAlphabet(selectedAlphabet.value);
+    alphabet = selectAlphabet(selectedAlphabet.value);
     cipher = []; //clear the old one 
     
     switch(direction){
@@ -57,51 +78,47 @@ function createCipher(){
             }
             break;
     }
-    console.log(alphabet);
-    console.log(key);
-    console.log(cipher);
-    console.log(direction);
 }
 
 function encode(){
     createCipher();
     
-    let text = cipherEncodeText.value.toUpperCase();
+    const text = inputtedText.value.toUpperCase();
     let result = '';
 
     for (let i = 0; i < text.length; i++){
-        if (text.charAt(i) == ' '){
-            result += ' ';
+        if (text.charAt(i) == ' ' && ignorSpace.checked == true){
+            result += '';
         }
         else if (cipher[alphabet.indexOf(text.charAt(i))] == undefined){
-            result += '�';
+            result += text.charAt(i);
         }
         else{
             result += cipher[alphabet.indexOf(text.charAt(i))];
         }
     }
-    // cipherEncodeText.value = '';
-    outputResult(result);
+    writeToLog('encode', text, result);
 }
 function decode(){
     createCipher();
 
-    let text = cipherDecodeText.value.toUpperCase();
+    const text = inputtedText.value.toUpperCase();
     let result = '';
+
     for (let i = 0; i < text.length; i++){
-        if (text.charAt(i) == ' '){
-            result += ' ';
+        if (text.charAt(i) == ' ' && ignorSpace.checked == true){
+            result += '';
         }
         else if (alphabet.indexOf(text.charAt(i)) == -1){        
-            result += '�';
+            result += text.charAt(i);
         }
         else{
             result += alphabet[cipher.indexOf(text.charAt(i))];
         }
     }
-    outputResult(result);
+    writeToLog('decode', result, text);
 }
 
 btnEncode.addEventListener("click", encode);
 btnDecode.addEventListener("click", decode);
-selectedAlphabet.addEventListener("change", rewriteSelectShift)
+selectedAlphabet.addEventListener("change", SelectShiftUpdate);

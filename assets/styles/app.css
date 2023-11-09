@@ -1,13 +1,72 @@
+/*@import url('https://unpkg.com/css.gg@2.0.0/icons/css/menu-oreos.css'); https://css.gg/menu-oreos */
+:root{
+    --dark-main: #1f1b23;
+    --dark-grey: #131313;
+    --link: #a358ff;
+    --link-visited: #b58de8;
+    --text-color: #fefefe;
+}
 body, html{
     margin: 0;
+    background-color: var(--dark-grey);
+    color: var(--text-color);
+}
+a:visited{
+    color: var(--link-visited);
+}
+a:link{
+    color: var(--link);
 }
 main{
-    width: 80vw;
+    width: 75vw;
+    padding-top: 100px;
     margin: 0 auto;
-    display: table;
 }
-.container{
+.options-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 1.25em;
+    margin: 15px 0;
+}
+.select-container{
+    display: grid;
+    grid-column: span 2;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    row-gap: 20px;
+}
+.select-container div{
+    min-width: 200px;
+}
+.btn-container div{
+    display: flex;
+    justify-content: space-around;
+}
+.btn-container button{
     width: fit-content;
-    text-align: center;
-    display: table-row;
+}
+#decode-encode-text{
+    width: calc(100% - 8px);
+    height: 100px;
+}
+.output-text{
+    width: calc(100% - 8px);
+    height: 100px;
+}
+textarea{
+    background-color: var(--dark-main);
+    color: var(--text-color);
+    border: 1px solid #232323;
+    border-radius: 6px;
+    resize: none;
+    padding: 4px;
+}
+textarea:focus{
+    outline: none;
+}
+h1{
+    margin-bottom: 0;
+}
+.description{
+    margin: 25px 0;
+    font-size: 1.1em;
 }
