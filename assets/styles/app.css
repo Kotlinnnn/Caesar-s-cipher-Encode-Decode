@@ -1,4 +1,3 @@
-/*@import url('https://unpkg.com/css.gg@2.0.0/icons/css/menu-oreos.css'); https://css.gg/menu-oreos */
 :root{
     --dark-main: #1f1b23;
     --dark-grey: #131313;
@@ -23,23 +22,24 @@ main{
     margin: 0 auto;
 }
 .options-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     font-size: 1.25em;
     margin: 15px 0;
 }
 .select-container{
-    display: grid;
-    grid-column: span 2;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    row-gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
 }
 .select-container div{
-    min-width: 200px;
+    flex-grow: 1;
+    flex-basis: 200px;
+}
+.btn-container{
+    width: 25%;
+    padding: 20px 0 10px 0;
 }
 .btn-container div{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .btn-container button{
     width: fit-content;
